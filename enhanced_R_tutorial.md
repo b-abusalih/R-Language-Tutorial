@@ -117,7 +117,7 @@ Matrices are two-dimensional, rectangular collections of elements of the *same* 
 ```R
 # Create a matrix from a vector
 matrix_data <- c(1, 2, 3, 4, 5, 6)
-my_matrix <- matrix(matrix_data, nrow = 2, ncol = 3, byrow = TRUE)
+my_matrix <- matrix(matrix_data, nrow = 2, ncol = 3, byrow = TRUE) # TRUE: Tells R to fill the matrix row-wise (left to right, then top to bottom). If set to FALSE, it fills column-wise (top to bottom, then left to right).
 print(my_matrix)
 # Output:
 #      [,1] [,2] [,3]
@@ -130,20 +130,9 @@ print(my_matrix[, 1])  # Outputs first column: 1 4
 print(my_matrix[2, ])  # Outputs second row: 4 5 6
 ```
 
-#### Arrays
-
-Arrays are multi-dimensional extensions of matrices. They can store data in more than two dimensions, but all elements must be of the *same* data type.
-
-```R
-# Create a 3-dimensional array
-array_data <- 1:24 # Numbers from 1 to 24
-my_array <- array(array_data, dim = c(2, 3, 4)) # 2 rows, 3 columns, 4 matrices
-print(my_array)
-```
-
 #### Lists
 
-Lists are highly flexible data structures that can contain elements of *different* data types. They can even contain other lists, making them suitable for complex data organizations.
+Lists are highly flexible data structures that can contain elements of *different* data types. They can even contain other lists, making them suitable for complex data organisations.
 
 ```R
 # Create a list
@@ -201,15 +190,10 @@ A crucial step in any data analysis workflow is importing data into your R envir
 Comma-Separated Values (CSV) files are a common format for storing tabular data. R's `read.csv()` function is designed to read data from CSV files into a data frame.
 
 ```R
-# Assuming you have a file named 'my_data.csv' in your working directory
-# with the following content:
-# name,age,city
-# John,25,New York
-# Jane,30,London
-# Peter,35,Paris
+# Assuming you have a file named 'students.csv' in your working directory
 
-my_data <- read.csv("my_data.csv")
-print(my_data)
+students_data <- read.csv("students.csv")
+print(students_data)
 ```
 
 #### From Excel Files
@@ -313,32 +297,6 @@ iris_summary <- iris %>%
   group_by(Species) %>%
   summarise(avg_sepal_length = mean(Sepal.Length))
 print(iris_summary)
-```
-
-### `tidyr`: Tidying Your Data
-
-`tidyr` helps you to create "tidy data". Tidy data is a standard way of organizing data that makes it easier to work with. The two most important functions in `tidyr` are `pivot_longer()` and `pivot_wider()`.
-
-*   `pivot_longer()`: Makes "wide" data longer.
-*   `pivot_wider()`: Makes "long" data wider.
-
-Let's create a simple example to illustrate this.
-
-```R
-# Create a wide data frame
-wide_data <- data.frame(
-  student = c("Alice", "Bob"),
-  exam1 = c(90, 85),
-  exam2 = c(92, 88)
-)
-
-# Convert to long format
-long_data <- wide_data %>% pivot_longer(cols = c(exam1, exam2), names_to = "exam", values_to = "score")
-print(long_data)
-
-# Convert back to wide format
-wide_data_again <- long_data %>% pivot_wider(names_from = "exam", values_from = "score")
-print(wide_data_again)
 ```
 
 ## 5. Data Visualization with ggplot2
